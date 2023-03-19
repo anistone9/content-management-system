@@ -24,9 +24,9 @@ const db = mysql.createConnection(
 app.post('/api/new-department', ({ body }, res) => {
     const sql = `INSERT INTO department (department_name)
     VALUES (?)`;
-    const params = [body.name];
+    const params = [body.department_name];
 
-    db.query(sql, params, (err, res) => {
+    db.query(sql, params, (err, result) => {
         if (err) {
             res.status(400).json({ error: err.message });
             return;
@@ -40,7 +40,7 @@ app.post('/api/new-department', ({ body }, res) => {
 
 //Read all departments
 app.get('/api/departments', (req, res) => {
-    const sql = `SELECT id, name AS department FROM department`;
+    const sql = `SELECT id, department_name AS department FROM department`;
 
     db.query(sql, (err, data) => {
         if (err) {
@@ -60,7 +60,7 @@ app.post('/api/new-role', ({ body }, res) => {
     VALUES (?)`;
     const params = [body.title, body.salary, body.department_id];
 
-    db.query(sql, params, (err, res) => {
+    db.query(sql, params, (err, result) => {
         if (err) {
             res.status(400).json({ error: err.message });
             return;
@@ -74,7 +74,7 @@ app.post('/api/new-role', ({ body }, res) => {
 
 //Read all roles
 app.get('/api/roles', (req, res) => {
-    const sql = `SELECT roles.id AS role_id, roles.title AS title, roles.salary AS salary, department.name AS department FROM roles JOIN department ON roles.department_id = department.id;`;
+    const sql = `SELECT roles.id AS role_id, roles.title AS title, roles.salary AS salary, department.department_name AS department FROM roles JOIN department ON roles.department_id = department.id;`;
 
     db.query(sql, (err, rows) => {
         if (err) {
@@ -93,7 +93,7 @@ app.put('api/roles/:id', (req, res) => {
     const sql = `UPDATE roles SET title = ? WHERE id = ?`;
     const params = [req.body.roles, req.params.id];
 
-    db.query(sql, params, (err, res) => {
+    db.query(sql, params, (err, result) => {
         if (err) {
             res.status(400).json({ error: err.message });
         } else if (!res.affectedRows) {
@@ -112,7 +112,7 @@ app.post('/api/new-employee', ({ body }, res) => {
     VALUES (?)`;
     const params = [body.first_name, body.last_name, body.role_id, body.manager_id];
 
-    db.query(sql, params, (err, res) => {
+    db.query(sql, params, (err, result) => {
         if (err) {
             res.status(400).json({ error: err.message });
             return;

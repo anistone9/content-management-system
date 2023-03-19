@@ -1,7 +1,7 @@
 const db = require('./connections');
 
 //Variable connection that represents whatever connections gets passed in through the constructor
-class EmployeeQueries {
+class Queries {
     constructor(connection) {
         this.connection = connection;
     }
@@ -24,8 +24,9 @@ class EmployeeQueries {
     }
 
     readEmployees() {
-        return this.connection.promise().query(`SELECT employee.id AS employee_id, employee.first_name AS first_name, employee.last_name AS last_name, roles.title AS job_title, department.department_name AS department, roles.salary AS salary, employee.manager_id AS manager_id
-        FROM employee JOIN roles ON employee.role_id = roles.id JOIN department on roles.department_id = department.id`);
+        return this.connection.promise().query(`SELECT employee.id AS employee_id, employee.first_name AS first_name, employee.last_name AS last_name, roles.title AS job_title, department.department_name AS department, roles.salary AS salary, CONCAT(manager.first_name,' ', manager.last_name) AS manager_name
+        FROM employee JOIN roles ON employee.role_id = roles.id JOIN department ON roles.department_id = department.id
+        INNER JOIN employee AS manager ON manager.id = employee.manager_id`);
     }
 
     addEmployee() {
@@ -38,4 +39,4 @@ class EmployeeQueries {
 }
 
 //Instantiate the class and export it 
-module.exports = new EmployeeQueries(db);
+module.exports = new Queries(db);

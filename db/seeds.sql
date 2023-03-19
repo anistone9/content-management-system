@@ -19,10 +19,10 @@ VALUES ("Software Engineer", 125000, 4),
 
 INSERT INTO employee (first_name, last_name, role_id, manager_id)
 VALUES ("Laura", "Marshall", 4, NULL),
-       ("James", "Lee", 5, 6),
-       ("Divya", "Singh", 8, 9),
+       ("James", "Lee", 5, 8),
+       ("Divya", "Singh", 8, 6),
        ("Erick", "Santos", 7, NULL),
-       ("Maia", "Jones", 1, 2),
+       ("Maia", "Jones", 1, 9),
        ("Steven", "Diaz", 9, NULL),
        ("Kendra", "Brown", 3, NULL),
        ("Patrick", "Wozniack", 6, NULL),

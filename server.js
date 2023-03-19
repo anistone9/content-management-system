@@ -74,7 +74,7 @@ app.post('/api/new-role', ({ body }, res) => {
 
 //Read all roles
 app.get('/api/roles', (req, res) => {
-    const sql = `SELECT roles.id AS role_id, roles.title AS title, roles.salary AS salary, department.department_name AS department FROM roles JOIN department ON roles.department_id = department.id;`;
+    const sql = `SELECT roles.id AS role_id, roles.title AS job_title, roles.salary AS salary, department.department_name AS department FROM roles JOIN department ON roles.department_id = department.id;`;
 
     db.query(sql, (err, rows) => {
         if (err) {
@@ -126,7 +126,7 @@ app.post('/api/new-employee', ({ body }, res) => {
 
 //Read all employees
 app.get('/api/employees', (req, res) => {
-    const sql = `SELECT employee.id AS employee_id, employee.first_name as first_name, employee.last_name AS last_name, roles.title AS title, roles.department_id AS department, roles.salary AS salary, employee.manager_id AS manager_id FROM employee JOIN roles ON employee.role_id = roles.id;`;
+    const sql = `SELECT employee.id AS employee_id, employee.first_name AS first_name, employee.last_name AS last_name, roles.title AS title, roles.department_id AS department, roles.salary AS salary, employee.manager_id AS manager_id FROM employee JOIN roles ON employee.role_id = roles.id;`;
 
     db.query(sql, (err, rows) => {
         if (err) {

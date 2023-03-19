@@ -1,2 +1,80 @@
 # content-management-system
-Command-Line Application to Interact with Information Stored in a Database
+Command-Line Application to Interact with Information Stored in a Database   
+
+# Table of Contents 
+- [Description](#description)     
+- [User Story](#userstory)  
+- [Acceptance Criteria](#acceptancecriteria)      
+- [Installation](#installation)   
+- [Usage](#usage)   
+- [Demo](#demo)   
+- [Credits](#credits)    
+- [License](#license)   
+
+## Description   
+Command-line application that allows users to interact with a database, using Node.js, Inquirer, and MySQL. The user can view the employee database of the company, and perform actions such as: view all employees, add a new employee, update an employee file, view all roles, add a new role, view all departments, and add a new department.  
+
+## User Story   
+
+AS A business owner
+I WANT to be able to view and manage the departments, roles, and employees in my company
+SO THAT I can organize and plan my business   
+
+## Acceptance Criteria   
+
+GIVEN a command-line application that accepts user input
+WHEN I start the application
+THEN I am presented with the following options: view all departments, view all roles, view all employees, add a department, add a role, add an employee, and update an employee role
+WHEN I choose to view all departments
+THEN I am presented with a formatted table showing department names and department ids
+WHEN I choose to view all roles
+THEN I am presented with the job title, role id, the department that role belongs to, and the salary for that role
+WHEN I choose to view all employees
+THEN I am presented with a formatted table showing employee data, including employee ids, first names, last names, job titles, departments, salaries, and managers that the employees report to
+WHEN I choose to add a department
+THEN I am prompted to enter the name of the department and that department is added to the database
+WHEN I choose to add a role
+THEN I am prompted to enter the name, salary, and department for the role and that role is added to the database
+WHEN I choose to add an employee
+THEN I am prompted to enter the employee’s first name, last name, role, and manager, and that employee is added to the database
+WHEN I choose to update an employee role
+THEN I am prompted to select an employee to update and their new role and this information is updated in the database           
+
+## Installation   
+Clone the repository in GitHub, and install Node.js. Additionally, this application requires mysql2 and inquirer (version 8.2.4 used in this case).      
+
+# Usage    
+To use this application, open the integrated terminal in Visual Studio Code, and type 'node index.' Next, follow the suite of questions and provide answers for each one.      
+
+## Demo   
+
+https://user-images.githubusercontent.com/58886869/223930314-ff6aea6d-18e0-499c-aadd-1d84d056f452.mp4
+
+https://drive.google.com/file/d/1uD2v4K8ggvHStrBAn4sawFc32u8vIuXH/view
+
+## Credits   
+University of Arizona Coding Bootcamp resources (activities and lesson examples) 
+
+## License  
+
+MIT License
+
+Copyright (c) 2023 anistone9
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.  

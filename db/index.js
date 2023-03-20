@@ -11,7 +11,7 @@ class Queries {
     }
 
     addDepartment(department_name) {
-        return this.connection.promise().query(`INSERT INTO department (department_name) VALUES ?`, department_name);
+        return this.connection.promise().query(`INSERT INTO department (department_name) VALUES (?)`, department_name);
     }
 
     readRoles() {
@@ -20,7 +20,7 @@ class Queries {
     }
 
     addRole(role) {
-        return this.connection.promise().query(`INSERT INTO roles (title, salary, department_id) VALUES ?`, role);
+        return this.connection.promise().query(`INSERT INTO roles (title, salary, department_id) VALUES (?, ?, ?)`, [role.title, role.salary, role.department_id]);
     }
 
     readEmployees() {
@@ -30,11 +30,11 @@ class Queries {
     }
 
     addEmployee(employee) {
-        return this.connection.promise().query(`INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES ?`, employee);
+        return this.connection.promise().query(`INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)`, [employee.first_name, employee.last_name, employee.job_title, employee.manager_name]);
     }
 
     updateEmployee(updatedRole) {
-        return this.connection. promise().query(`UPDATE employee SET role_id = ? WHERE id = ?`, updatedRole);
+        return this.connection. promise().query(`UPDATE employee SET role_id = (?) WHERE id = (?)`, [updatedRole.role_id, updatedRole.employee_id]);
     }
 }
 

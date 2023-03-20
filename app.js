@@ -45,19 +45,19 @@ function userPrompt() {
 
 async function viewDepartments() {
     const data = await userQueries.readDepartments();
-    console.table(data);
+    console.log(data);
     userPrompt();
 };
 
 async function viewRoles() {
     const data = await userQueries.readRoles();
-    console.table(data);
+    console.log(data);
     userPrompt();
 };
 
 async function viewEmployees() {
     const data = await userQueries.readEmployees();
-    console.table(data);
+    console.log(data);
     userPrompt();
 }
 
@@ -66,33 +66,31 @@ async function viewEmployees() {
 async function newDepartment() {
     const data = await userQueries.readDepartments();
 
-    inquirer.prompt([
+    const deptPrompt = await inquirer.prompt([
         {
             type: 'input',
-            name: 'department',
+            name: 'department_name',
             message: 'Enter the department name',
         },
     ])
-    .then(answers => {
-        const department = answers.department;
-    })
-    const newDepartment = await userQueries.addDepartment(department);
-    console.table(data);
+    const newDepartment = userQueries.addDepartment(deptPrompt.department_name);
+    console.log(deptPrompt);
     userPrompt();
 };
 
 async function newRole() {
     const data = await userQueries.readRoles();
     const departments = await userQueries.readDepartments();
-    const departmentList = departments.map(({ id, department_name }) => ({
+    console.log(departments[0]);
+    const departmentList = departments[0].map(({ id, department_name }) => ({
         name: department_name,
         value: id
     }));
 
-    inquirer.prompt([
+    const rolePrompt = await inquirer.prompt([
         {
             type: 'input',
-            name: 'role',
+            name: 'title',
             message: 'Enter the new job title',
         },
         {
@@ -102,89 +100,89 @@ async function newRole() {
         },
         {
             type: 'list',
-            name: 'departments',
+            name: 'department_id',
             message: 'Which department will this role belong to?',
             choices: departmentList,
         },
     ])
-        .then(answers => {
-            const role = [answers.role, answers.salary, answers.departments];
-            })
-        const newRole = await userQueries.addRole(role);
-        console.table(data);
+        const newRole = await userQueries.addRole(rolePrompt);
+        console.log(rolePrompt);
         userPrompt();
 };
 
 async function newEmployee() {
-    const data = await userQueries.readEmployees();
-    const managerList = data.map(({ id, first_name, last_name }) => ({
+    const employees = await userQueries.readEmployees();
+    const roles = await userQueries.readRoles();
+    console.log(roles[0]);
+    const rolesList = roles[0].map(({ role_id, job_title }) => ({
+        name: job_title,
+        value: role_id
+    }));
+    const managerList = employees[0].map(({ employee_id, first_name, last_name }) => ({
         name: first_name + ' ' + last_name,
-        value: id
+        value: employee_id
     }));
 
-    inquirer.prompt([
+    const employeePrompt = await inquirer.prompt([
         {
             type: 'input',
-            name: 'first',
+            name: 'first_name',
             message: 'Enter first name of the new employee',
         },
         {
             type: 'input',
-            name: 'last',
+            name: 'last_name',
             message: 'Enter last name of the employee',
         },
         {
-           type: 'input',
-           name: 'role',
-           message: 'Enter the job title for the new employee', 
+           type: 'list',
+           name: 'job_title',
+           message: 'Select a job title for the new employee',
+           choices: rolesList,
         },
         {
             type: 'list',
-            name: 'manager',
+            name: 'manager_name',
             message: 'Enter the manager name of the new employee',
             choices: managerList,
         },
     ])
-        .then(answers => {
-           const employee = [answers.first, answers.last, answers.role, answers.manager];
-            })
-        const newEmployee = await userQueries.addEmployee(employee);
-        console.table(data);
+        const newEmployee = await userQueries.addEmployee(employeePrompt);
+        console.log(employeePrompt);
         userPrompt();
 };
 
 async function changeEmployee() {
-    const data = await userQueries.readEmployees();
-    const employeeList = data.map(({ id, first_name, last_name }) => ({
+    const employees = await userQueries.readEmployees();
+    const employeeList = employees[0].map(({ employee_id, first_name, last_name }) => ({
         name: first_name + ' ' + last_name,
-        value: id
+        value: employee_id
     }));
     const roles = await userQueries.readRoles();
-    const rolesList = roles.map(({ id, title }) => ({
-        name: title,
-        value: id
+    const rolesList = roles[0].map(({ role_id, job_title }) => ({
+        name: job_title,
+        value: role_id
     }));
 
 
-    inquirer.prompt([
+    const updatePrompt = await inquirer.prompt([
         {
             type: 'list',
-            name: 'employee',
+            name: 'employee_id',
             message: 'Select the employee to update',
             choices: employeeList,
         },
         {
             type: 'list',
-            name: 'role',
+            name: 'role_id',
             message: 'What is the new title for this employee?',
             choices: rolesList,
         },
     ])
-        .then(answers => {
-            const updatedRole = [answers.employee, answers.role];
-        })
-        const newRole = await userQueries.updateEmployee(updatedRole);
-        console.table(data);
+        const newRole = await userQueries.updateEmployee(updatePrompt);
+        console.log(updatePrompt);
         userPrompt();
 }
+
+userPrompt();
 

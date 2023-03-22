@@ -1,7 +1,6 @@
 //Import the Queries class and the sql connections, inquirer, and console.table
 const userQueries = require('./db/index');
 const inquirer = require('inquirer');
-const consoleTable = require('console.table');
 
 //Menu displayed when app is initiated, and running list of options
 function userPrompt() {
@@ -45,19 +44,19 @@ function userPrompt() {
 
 async function viewDepartments() {
     const data = await userQueries.readDepartments();
-    console.log(data);
+    console.table(data[0]);
     userPrompt();
 };
 
 async function viewRoles() {
     const data = await userQueries.readRoles();
-    console.log(data);
+    console.table(data[0]);
     userPrompt();
 };
 
 async function viewEmployees() {
     const data = await userQueries.readEmployees();
-    console.log(data);
+    console.table(data[0]);
     userPrompt();
 }
 
@@ -74,14 +73,14 @@ async function newDepartment() {
         },
     ])
     const newDepartment = userQueries.addDepartment(deptPrompt.department_name);
-    console.log(deptPrompt);
+    console.table(deptPrompt);
     userPrompt();
 };
 
 async function newRole() {
     const data = await userQueries.readRoles();
     const departments = await userQueries.readDepartments();
-    console.log(departments[0]);
+    console.table(departments[0]);
     const departmentList = departments[0].map(({ id, department_name }) => ({
         name: department_name,
         value: id
@@ -113,7 +112,7 @@ async function newRole() {
 async function newEmployee() {
     const employees = await userQueries.readEmployees();
     const roles = await userQueries.readRoles();
-    console.log(roles[0]);
+    console.table(roles[0]);
     const rolesList = roles[0].map(({ role_id, job_title }) => ({
         name: job_title,
         value: role_id
@@ -148,7 +147,7 @@ async function newEmployee() {
         },
     ])
         const newEmployee = await userQueries.addEmployee(employeePrompt);
-        console.log(employeePrompt);
+        console.table(employeePrompt);
         userPrompt();
 };
 
@@ -180,7 +179,7 @@ async function changeEmployee() {
         },
     ])
         const newRole = await userQueries.updateEmployee(updatePrompt);
-        console.log(updatePrompt);
+        console.table(updatePrompt);
         userPrompt();
 }
 

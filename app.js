@@ -37,11 +37,13 @@ function userPrompt() {
         } else if (answers.options == 'Update Employee') {
             changeEmployee();
         } else if (answers.options == 'Quit') {
-            userQueries.end();
+            process.exit();
         }
     });
 };
 
+//Asynchronous function displaying the departments after running the readDepartments method
+//All async functions return back to options for user prompts
 async function viewDepartments() {
     const data = await userQueries.readDepartments();
     console.table(data[0]);
@@ -80,7 +82,7 @@ async function newDepartment() {
 async function newRole() {
     const data = await userQueries.readRoles();
     const departments = await userQueries.readDepartments();
-    console.table(departments[0]);
+    //console.table(departments[0]);
     const departmentList = departments[0].map(({ id, department_name }) => ({
         name: department_name,
         value: id
@@ -105,14 +107,13 @@ async function newRole() {
         },
     ])
         const newRole = await userQueries.addRole(rolePrompt);
-        console.log(rolePrompt);
         userPrompt();
 };
 
 async function newEmployee() {
     const employees = await userQueries.readEmployees();
     const roles = await userQueries.readRoles();
-    console.table(roles[0]);
+    //console.table(roles[0]);
     const rolesList = roles[0].map(({ role_id, job_title }) => ({
         name: job_title,
         value: role_id
@@ -147,7 +148,6 @@ async function newEmployee() {
         },
     ])
         const newEmployee = await userQueries.addEmployee(employeePrompt);
-        console.table(employeePrompt);
         userPrompt();
 };
 
@@ -179,7 +179,6 @@ async function changeEmployee() {
         },
     ])
         const newRole = await userQueries.updateEmployee(updatePrompt);
-        console.table(updatePrompt);
         userPrompt();
 }
 

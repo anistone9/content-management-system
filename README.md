@@ -44,13 +44,9 @@ THEN I am prompted to select an employee to update and their new role and this i
 Clone the repository in GitHub, and install Node.js. Additionally, this application requires mysql2 and inquirer (version 8.2.4 used in this case).      
 
 # Usage    
-To use this application, open the integrated terminal in Visual Studio Code, and type 'node index.' Next, follow the suite of questions and provide answers for each one.      
+To use this application, open the integrated terminal at db level, in Visual Studio Code, and login to mysql. Next, source the schema and seeds files.  Then, terminate the mysql session, open the integrated terminal at app.js level, and type node app. Select an option from the displayed menu, and continue reading or updating tables as needed, and fianlly select Quit when done.   
 
 ## Demo   
-
-https://user-images.githubusercontent.com/58886869/223930314-ff6aea6d-18e0-499c-aadd-1d84d056f452.mp4
-
-https://drive.google.com/file/d/1uD2v4K8ggvHStrBAn4sawFc32u8vIuXH/view
 
 ## Credits   
 University of Arizona Coding Bootcamp resources (activities and lesson examples) 

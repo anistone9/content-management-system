@@ -6,6 +6,7 @@ class Queries {
         this.connection = connection;
     }
     
+    //Methods for each option in the table and the app
     readDepartments() {
         return this.connection.promise().query(`SELECT id, department_name FROM department;`);
     }
